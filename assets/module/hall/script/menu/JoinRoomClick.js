@@ -1,0 +1,93 @@
+var beiMiCommon = require("BeiMiCommon");
+
+cc.Class({
+    extends: beiMiCommon,
+    properties: {
+        // foo: {
+        //     // ATTRIBUTES:
+        //     default: null,        // The default value will be used only when the component attaching
+        //                           // to a node for the first time
+        //     type: cc.SpriteFrame, // optional, default is typeof default
+        //     serializable: true,   // optional, default is true
+        // },
+        // bar: {
+        //     get () {
+        //         return this._bar;
+        //     },
+        //     set (value) {
+        //         this._bar = value;
+        //     }
+        // },
+        numdata: {
+            default:null,
+            type:cc.Node
+
+
+        }
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad : function () {
+        this.roomid = new Array() ;
+    },
+    onClick:function(event,data){
+        if(this.roomid.length < 6){
+            this.roomid.push(data);
+            this.disRoomId();
+        }
+        if(this.roomid.length == 6){
+            this.closeOpenWin();
+            /**
+             * 查询服务端的房间号码 ， 然后通过房间号码找到对应的房间游戏类型，玩法等信息
+             */
+            if(this.ready()){
+                let socket = this.socket();
+                /**
+                 * 发送 room请求
+                 */
+                let self = this
+                socket.exec("search_room" , { roomId:this.roomid.join("")});
+                // this.registercallback(this.roomCallBack);
+                socket.on("search_room" , (res)=>{
+                     self.registercallback(self.roomCallBack(res,self));
+                });
+               
+            }
+            this.loadding();
+        }
+    },
+    roomCallBack:function(result , self){
+        var data = self.parse(result) ;
+        if(data.code === 1){
+            debugger
+          self.scene(data.data.gameType,self);
+
+        }else if(data.code === 2){
+            this.alert("房间号不存在。");
+        }else if(data.code == 3){
+            this.alert("房间已满员。");
+        }
+        this.closeloadding()
+
+    },
+    onDeleteClick:function(){
+        this.roomid.splice(this.roomid.length-1 , this.roomid.length) ;
+        this.disRoomId();
+    },
+    onCleanClick:function(){
+        this.roomid.splice(0 , this.roomid.length) ;
+        this.disRoomId();
+    },
+    disRoomId:function(){
+        let children = this.numdata.children ;
+        for(var inx = 0 ; inx < 6 ; inx ++){
+            if(inx < this.roomid.length){
+                children[inx].children[0].getComponent(cc.Label).string = this.roomid[inx] ;
+            }else{
+                children[inx].children[0].getComponent(cc.Label).string = "" ;
+            }
+        }
+    }
+    // update (dt) {},
+});
