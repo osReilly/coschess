@@ -32,7 +32,7 @@ cc.Class({
             canvas.fitHeight = true;
             canvas.fitWidth = true;
         }
-        let win = cc.director.getWinSize() ;
+        let win = cc.winSize() ;
         cc.view.setDesignResolutionSize(win.width, win.height, cc.ResolutionPolicy.EXACT_FIT);
         this.initMgr();
 

@@ -1,22 +1,12 @@
 cc.VERSION = 2017061001;
 var HTTP = cc.Class({
     extends: cc.Component,
-
     properties: {
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
     },
     statics: {
         baseURL:"http://47.105.231.104",
-        wsURL : "ws://192.168.0.254:9090",
+        // wsURL : "ws://192.168.0.254:9090",
+        wsURL : "ws://192.168.0.115:9090",
         authorization: null,
         httpGet: function (url , success , error , object) {
             var xhr = cc.loader.getXMLHttpRequest();
@@ -54,11 +44,7 @@ var HTTP = cc.Class({
             xhr.onerror = function(event){
                 error(object);
             };
-
-            // note: In Internet Explorer, the timeout property may be set only after calling the open()
-            // method and before calling the send() method.
             xhr.timeout = 3000;// 5 seconds for timeout
-
             xhr.send();
         },
         encodeFormData : function(data)  
@@ -99,18 +85,10 @@ var HTTP = cc.Class({
                 xhr.setRequestHeader("Accept-Encoding", "gzip,deflate");
             }
             xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    
-            // note: In Internet Explorer, the timeout property may be set only after calling the open()
-            // method and before calling the send() method.
             xhr.timeout = 5000;// 5 seconds for timeout
-            
             xhr.send( HTTP.encodeFormData(params));
         }
     },
-
-    // use this for initialization
     onLoad: function () {
     },
-
-    
 });

@@ -70,8 +70,6 @@ cc.Class({
                         if(value != ""){
                             value = value + "," ;
                         }
-                        console.log(option.item);
-
                         value = value + option.item.value ;
                         if(option.item.expendCard) expendCard= option.item.expendCard
                     }

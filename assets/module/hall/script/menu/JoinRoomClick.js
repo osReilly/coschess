@@ -60,7 +60,6 @@ cc.Class({
     roomCallBack:function(result , self){
         var data = self.parse(result) ;
         if(data.code === 1){
-            debugger
           self.scene(data.data.gameType,self);
 
         }else if(data.code === 2){

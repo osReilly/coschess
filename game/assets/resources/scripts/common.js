@@ -929,7 +929,7 @@ cc.Class({
     });
   },
   resize() {
-    let win = cc.director.getWinSize();
+    let win = cc.winSize();
     cc.view.setDesignResolutionSize(
       win.width,
       win.height,

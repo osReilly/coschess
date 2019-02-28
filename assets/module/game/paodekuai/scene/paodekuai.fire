@@ -3116,9 +3116,6 @@
     "inviteplayer": {
       "__uuid__": "0dd046d9-463b-4149-8aea-d12fb4b9b821"
     },
-    "player": {
-      "__uuid__": "153e111b-905c-4c48-ba05-3df2fe5125cc"
-    },
     "_id": "41TgXIOm9BYI/KZyx+GUhp"
   },
   {
@@ -3436,7 +3433,7 @@
     "target": {
       "__id__": 61
     },
-    "component": "DizhuBegin",
+    "component": "PaodekuaiBegin",
     "handler": "begin",
     "customEventData": ""
   },
@@ -3452,7 +3449,7 @@
         "__id__": 71
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 0,
     "_components": [
       {

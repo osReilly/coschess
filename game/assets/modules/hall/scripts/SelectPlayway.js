@@ -34,7 +34,6 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        debugger
         if(cc.beimi != null && cc.beimi.token != null){
             this.disMenu("first") ;
             this.playwaypool = new cc.NodePool();

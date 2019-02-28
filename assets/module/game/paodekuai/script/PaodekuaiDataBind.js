@@ -112,7 +112,7 @@ cc.Class({
 
         this.cardslist = new Array();
 
-        for(i=0 ; i<2 ; i++){
+        for(i=0 ; i<3 ; i++){
             this.playerspool.put(cc.instantiate(this.player)); // 创建节点
         }
         for(i =0 ; i<25 ; i++){
@@ -136,6 +136,9 @@ cc.Class({
             var render = this.playermysql.getComponent("PlayerRender") ;
             render.initplayer(cc.beimi.user);
         }
+    },
+    addPlayer:function(){
+        return cc.instantiate(this.player)
     },
     pva_format:function(coins, cards , object){
         if(coins > 9999){

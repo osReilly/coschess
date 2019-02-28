@@ -32,8 +32,24 @@ cc.Class({
             canvas.fitHeight = true;
             canvas.fitWidth = true;
         }
-        let win = cc.director.getWinSize() ;
-        cc.view.setDesignResolutionSize(win.width, win.height, cc.ResolutionPolicy.EXACT_FIT);
+        var node = cc.find('Canvas');
+        var size = cc.view.getFrameSize();
+        var w = size.width;
+        var h = size.height;
+    
+        var cvs = node.getComponent(cc.Canvas);
+        var dw = cvs.designResolution.width;
+        var dh = cvs.designResolution.height;
+        //如果更宽 则让高显示满
+        if((w / h)  > (dw / dh)){
+            cvs.fitHeight = true;
+            cvs.fitWidth = false;
+        }
+        else{
+            //如果更高，则让宽显示满
+            cvs.fitHeight = false;
+            cvs.fitWidth = true;
+        }
         this.initMgr();
 
     },
@@ -57,8 +73,8 @@ cc.Class({
             cc.beimi.routes = {} ;
             cc.beimi.event = {}
             cc.beimi.http = require("HTTP");
-            cc.beimi.seckey = "beimi";
-            cc.beimi.gamestatus = "none" ;
+            // cc.beimi.seckey = "beimi";
+            // cc.beimi.gamestatus = "none" ;
 
 
 

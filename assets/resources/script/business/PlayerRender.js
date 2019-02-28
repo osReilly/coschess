@@ -76,10 +76,19 @@ cc.Class({
         this.cardslist = new Array();
         this.isRight = false ;
     },
-    initplayer:function(data , isRight){
-        this.username.string = data.nickname +data.id;
+    resetPos(){
+        this.pokertag.x = Math.abs(this.pokertag.x)
+        this.timer.x = Math.abs(this.timer.x)
+        this.headimg.x = Math.abs(this.headimg.x)
+        this.result.x = Math.abs(this.result.x)
+        this.cannot.x =  Math.abs(this.result.x)
+        this.donot.x =  Math.abs(this.donot.x)
+        this.jsq.x =  Math.abs(this.jsq.x)
+        this.dizhu.x =  -Math.abs(this.dizhu.x)
+    },
+    initplayer(data , isRight){
+        this.username.string = data.nickname+data.id;
         this.userid = data.id ;
-
         if(isRight == true){
             this.pokertag.x = this.pokertag.x * -1;
             this.timer.x = this.timer.x * -1;
@@ -122,6 +131,7 @@ cc.Class({
         if(this.takecards){
             this.takecards.active = false ;
         }
+        console.log('playerrender---',this)
     },
     countcards:function(cards){
         this.cardcount = this.cardcount + cards ;

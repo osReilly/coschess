@@ -93,8 +93,9 @@ cc.Class({
     order:function(){
         let self = this ;
         var frame , cardframe ;
-        if(self.card < 52){
+        if(self.card < 49){
             var cardvalue = self.card+1 ;
+            console.log('order-cardvalue',cardvalue)
             if(cardvalue % 4 == 0){
                 frame = this.atlas.getSpriteFrame('方片');
             }else if(cardvalue % 4 == 1){
